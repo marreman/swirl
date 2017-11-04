@@ -7,7 +7,7 @@ describe("swirl", () => {
 
   test("it updates the model properly", done => {
     const app = swirl({
-      init: 0,
+      model: 0,
       update: model => model + 1
     })
 
@@ -21,7 +21,7 @@ describe("swirl", () => {
 
   test("it respects unsubscribing to updates", () => {
     const app = swirl({
-      init: () => 0,
+      model: () => 0,
       update: model => model + 1
     })
 
@@ -36,7 +36,7 @@ describe("swirl", () => {
 
   test("unsubscribing two time does nothing", () => {
     const app = swirl({
-      init: () => 0,
+      model: () => 0,
       update: model => model + 1
     })
 

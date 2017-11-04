@@ -1,5 +1,4 @@
-module.exports = function swirl({ init, update }) {
-  let model = init
+module.exports = function swirl({ model, update }) {
   const subscribers = []
 
   return {
