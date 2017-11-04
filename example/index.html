@@ -1,0 +1,47 @@
+<canvas width="300" height="300"></canvas>
+<script src="../build/swirl.js"></script>
+<script>
+const ctx = document.querySelector("canvas").getContext("2d")
+const app = swirl({
+  init: {
+    balls: [
+      {
+        x: 25,
+        y: 25,
+        vx: Math.random() - Math.random(),
+        vy: Math.random() - Math.random(),
+        r: 25,
+        color: "red"
+      }
+    ]
+  },
+  update(model) {
+    return {
+      ...model,
+      balls: model.balls.map(ball => ({
+        ...ball,
+        x: ball.x + ball.vx,
+        y: ball.y + ball.vy
+      }))
+    }
+  }
+})
+
+app.subscribe(model => {
+  ctx.clearRect(0, 0, 300, 300)
+
+  model.balls.forEach(ball => {
+    ctx.beginPath()
+    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2, true)
+    ctx.closePath()
+    ctx.fillStyle = ball.color
+    ctx.fill()
+  })
+})
+
+// LOOP
+;(function loop() {
+  app.update()
+  requestAnimationFrame(loop)
+})()
+</script>
